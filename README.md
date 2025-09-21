@@ -12,7 +12,7 @@ Curated portfolio scaffolding focused on **Azure AI Foundry, Azure OpenAI, OpenA
 ## Quickstart
 1. Pick a project under `projects/`.
 2. Open in Dev Containers (or VS Code) for reproducible environment.
-3. Deploy shared baseline with Bicep, then per-project resources.
+3. Deploy infrastructure using Bicep, then per-project resources.
 4. Run the app, capture demos (gif/video), and document measurable outcomes.
 
 ### Project 01 – Azure OpenAI RAG (Complete)

@@ -12,8 +12,14 @@
       "version": "20"
     }
   },
-  "forwardPorts": [8000, 5500],
-  "postCreateCommand": "bash ${containerWorkspaceFolder}/shared/.devcontainer/postCreate.sh",
+  "forwardPorts": [
+    8000,
+    5500
+  ],
+  "postCreateCommand": [
+    "bash",
+    ".devcontainer/postCreate.sh"
+  ],
   "customizations": {
     "vscode": {
       "extensions": [

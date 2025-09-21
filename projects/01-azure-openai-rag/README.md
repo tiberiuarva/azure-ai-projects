@@ -49,9 +49,6 @@ End-to-end example that provisions Azure AI Search + Azure OpenAI, deploys a mod
     ```
     Browse to `http://localhost:5500/`. The page calls the API at the same origin when served over HTTP, and falls back to `http://localhost:8000` when opened via `file://`, surfacing errors inline if the request fails.
 
-### Dev Container Support
-- `shared/.devcontainer/devcontainer.json` starts from the Python 3.11 devcontainer image, adds Azure CLI + jq, forwards ports 8000/5500, and runs `shared/.devcontainer/postCreate.sh` to install `requirements.txt`, `projects/01-azure-openai-rag/requirements.txt`, and `az bicep install`. Open the repo with “Dev Containers: Reopen in Container” for a reproducible Project 01 environment.
-
 ## Evaluation
 - `eval/run_eval.py` measures citation presence, a groundedness proxy, substring accuracy, per-request latency (p50/p95), and source counts using `eval/queries.jsonl`.
 - `eval/metrics.md` documents the covered metrics and lists potential future checks for quality, safety, and operations (e.g., toxicity detection, hallucination judging, throughput/cost tracking, red-team suites).
