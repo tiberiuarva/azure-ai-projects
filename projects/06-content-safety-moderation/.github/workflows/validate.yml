@@ -1,0 +1,19 @@
+name: Project 06 Planned Check
+
+on:
+  push:
+    paths:
+      - 'projects/06-content-safety-moderation/**'
+  pull_request:
+    paths:
+      - 'projects/06-content-safety-moderation/**'
+
+jobs:
+  placeholder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Planned project notice
+        run: echo "Project 06 workflows will be defined once implementation starts."

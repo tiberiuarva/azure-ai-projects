@@ -1,0 +1,19 @@
+name: Project 05 Planned Check
+
+on:
+  push:
+    paths:
+      - 'projects/05-devops-copilot-accelerator/**'
+  pull_request:
+    paths:
+      - 'projects/05-devops-copilot-accelerator/**'
+
+jobs:
+  placeholder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Planned project notice
+        run: echo "Project 05 workflows will be defined once implementation starts."

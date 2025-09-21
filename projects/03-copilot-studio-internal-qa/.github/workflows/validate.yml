@@ -1,0 +1,19 @@
+name: Project 03 Planned Check
+
+on:
+  push:
+    paths:
+      - 'projects/03-copilot-studio-internal-qa/**'
+  pull_request:
+    paths:
+      - 'projects/03-copilot-studio-internal-qa/**'
+
+jobs:
+  placeholder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Planned project notice
+        run: echo "Project 03 workflows will be defined once implementation starts."

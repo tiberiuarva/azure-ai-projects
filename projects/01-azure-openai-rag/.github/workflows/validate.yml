@@ -1,0 +1,41 @@
+name: Project 01 Validate
+
+on:
+  push:
+    paths:
+      - 'projects/01-azure-openai-rag/**'
+  pull_request:
+    paths:
+      - 'projects/01-azure-openai-rag/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Bicep CLI
+        run: |
+          curl -Lo bicep https://github.com/Azure/bicep/releases/latest/download/bicep-linux-x64
+          chmod +x ./bicep
+          ./bicep --version
+
+      - name: Build Bicep templates
+        run: ./bicep build projects/01-azure-openai-rag/infra/main.bicep
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r projects/01-azure-openai-rag/requirements.txt
+
+      - name: Byte-compile app sources
+        run: python -m compileall projects/01-azure-openai-rag/app

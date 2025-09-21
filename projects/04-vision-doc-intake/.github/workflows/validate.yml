@@ -1,0 +1,19 @@
+name: Project 04 Planned Check
+
+on:
+  push:
+    paths:
+      - 'projects/04-vision-doc-intake/**'
+  pull_request:
+    paths:
+      - 'projects/04-vision-doc-intake/**'
+
+jobs:
+  placeholder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Planned project notice
+        run: echo "Project 04 workflows will be defined once implementation starts."

@@ -1,0 +1,4 @@
+{"question": "What architecture components are used in this RAG demo?", "expected_contains": "Azure AI Search"}
+{"question": "How do we measure evaluation quality in this project?", "expected_contains": "groundedness"}
+{"question": "What is the minimum password length in the bank policy?", "expected_contains": "12"}
+{"question": "What is the recommended network topology for enterprise?", "expected_contains": "hub"}

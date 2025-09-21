@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>RAG Demo</title>
+    <style>
+      body { font-family: system-ui, Arial, sans-serif; max-width: 820px; margin: 24px auto; padding: 0 12px; }
+      .src { font-size: 0.9em; }
+      .answer { white-space: pre-wrap; background: #f6f8fa; padding: 12px; border-radius: 8px; }
+      button { padding: 8px 14px; }
+      input, textarea { width: 100%; padding: 10px; }
+    </style>
+  </head>
+  <body>
+    <h1>Azure OpenAI RAG Demo</h1>
+    <p>Ask a question based on the indexed docs.</p>
+    <textarea id="q" rows="3" placeholder="Type your question...">What is this project about?</textarea>
+    <br/><br/>
+    <button onclick="ask()">Ask</button>
+    <h3>Answer</h3>
+    <div id="ans" class="answer"></div>
+    <h3>Sources</h3>
+    <ol id="src"></ol>
+
+    <script>
+      const apiOrigin = (() => {
+        const origin = window.location.origin || "";
+        if (origin.startsWith("http")) {
+          return origin;
+        }
+        return "http://localhost:8000";
+      })();
+
+      async function ask() {
+        const q = document.getElementById("q").value;
+        const ans = document.getElementById("ans");
+        const src = document.getElementById("src");
+
+        ans.textContent = "Loading...";
+        src.innerHTML = "";
+
+        try {
+          const endpoint = apiOrigin.replace(/\/$/, "") + "/ask";
+          const res = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ question: q, top_k: 4 })
+          });
+
+          if (!res.ok) {
+            let error = {};
+            try { error = await res.json(); } catch (_) {}
+            throw new Error(error.detail || ("Request failed with status " + res.status));
+          }
+
+          const data = await res.json();
+          ans.textContent = data.answer || "(no answer)";
+          (data.sources || []).forEach(s => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            a.href = s.url;
+            a.textContent = s.title || s.url || "Source";
+            a.target = "_blank";
+            li.appendChild(a);
+            src.appendChild(li);
+          });
+        } catch (err) {
+          ans.textContent = "Error: " + err.message;
+        }
+      }
+    </script>
+  </body>
+</html>
